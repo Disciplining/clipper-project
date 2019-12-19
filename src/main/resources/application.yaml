@@ -1,0 +1,12 @@
+spring:
+    application:
+        name: clipper-project
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://www.liyanxing.top:3306/db_clipper_project?serverTimezone=Asia/Shanghai
+        username: root
+        password: root123
+
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
