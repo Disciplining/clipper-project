@@ -1,3 +1,6 @@
+server:
+    port: 80
+
 spring:
     application:
         name: clipper-project
@@ -6,6 +9,12 @@ spring:
         url: jdbc:mysql://www.liyanxing.top:3306/db_clipper_project?serverTimezone=Asia/Shanghai
         username: root
         password: root123
+    thymeleaf:
+        prefix: classpath:/templates/ # 配置html文件的前缀
+        suffix: .html # 配置html文件的后缀
+        mode: HTML5
+        encoding: UTF-8
+        cache: false # 关闭热缓存
 
 mybatis-plus:
     configuration:
