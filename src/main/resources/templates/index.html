@@ -10,14 +10,59 @@
         <script src="/clipboard.min.js"></script>
 
         <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> <!-- bootstrap核心css -->
+
+        <style>
+            .container
+            {
+                margin-top: 50px;
+            }
+
+            .text-center
+            {
+                vertical-align: middle!important;
+            }
+
+            div.container div
+            {
+                /*background: red;*/
+                display: flex;
+                justify-content: center;
+            }
+        </style>
     </head>
 
     <body>
-        <div th:each="foo : ${all_content}">
-            <input th:id="@{'c'+${foo.contentId}}" type="text" th:value="${foo.contentMaster}"/>
-            <button class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">
-                复制
-            </button>
+        <div class="container">
+
+            <form class="form-inline" accept-charset="#" method="post">
+                <div class="row">
+                    <div class="form-group col-md-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="exampleInputAmount" name="contentMaster"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">添加此条内容</button>
+                </div>
+            </form>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th class="text-center">内容</th>
+                    <th class="col-md-3 text-center">操作</th>
+                </tr>
+
+                <tr th:each="foo : ${all_content}">
+                    <td class="text-center">
+                        <pre th:id="@{'c'+${foo.contentId}}" th:text="${foo.contentMaster}"></pre>
+                    </td>
+                    <td class="col-md-3 text-center">
+                        <button class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">复制</button>
+                        <a class="btn btn-info" th:href="@{ '/xxx?id=' + ${foo.contentId} }">修改</a>
+                        <a class="btn btn-danger" th:href="@{ '/xxx?id=' + ${foo.contentId} }">删除</a>
+                    </td>
+                </tr>
+            </table>
+
         </div>
 
         <script>
