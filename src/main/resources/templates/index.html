@@ -71,14 +71,30 @@
                 </tr>
 
                 <tr th:each="foo : ${all_content}">
-                    <td class="text-center">
-                        <pre th:id="@{'c'+${foo.contentId}}" th:text="${foo.contentMaster}"></pre>
-                    </td>
-                    <td class="col-md-3 text-center">
-                        <button class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">复制</button>
-                        <a class="btn btn-info" th:href="@{ '/xxx?id=' + ${foo.contentId} }">修改</a>
-                        <a class="btn btn-danger" th:href="@{ '/xxx?id=' + ${foo.contentId} }">删除</a>
-                    </td>
+
+                    <!--显示内容-->
+<!--                    <td class="text-center">-->
+<!--                        <pre th:id="@{'c'+${foo.contentId}}" th:text="${foo.contentMaster}"></pre>-->
+<!--                    </td>-->
+<!--                    <td class="col-md-3 text-center">-->
+<!--                        <button class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">复制</button>-->
+<!--                        <a class="btn btn-info" th:href="@{ '/xxx?id=' + ${foo.contentId} }">修改</a>-->
+<!--                        <a class="btn btn-danger" th:href="@{ '/removeOneContent?id=' + ${foo.contentId} }">删除</a>-->
+<!--                    </td>-->
+                    <!--//显示内容-->
+
+                    <!--修改-->
+                    <form action="#" method="post">
+                        <td class="text-center">
+                            <input th:id="@{'c'+${foo.contentId}}" th:value="${foo.contentMaster}" class="form-control text-center" required/>
+                        </td>
+                        <td class="col-md-3 text-center">
+                            <button class="btn btn-info">提交</button>
+                            <button class="btn btn-danger" th:href="@{ '/removeOneContent?id=' + ${foo.contentId} }">返回</button>
+                        </td>
+                    </form>
+                    <!--//修改-->
+
                 </tr>
             </table>
 
