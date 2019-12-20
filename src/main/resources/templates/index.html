@@ -22,6 +22,27 @@
                 vertical-align: middle!important;
             }
 
+            .form-group
+            {
+                width: 60%;
+                /*background-color: red;*/
+            }
+
+            .form-group .input-group
+            {
+                width: 100%;
+            }
+
+            .form-group .input-group input
+            {
+                width: 100%;
+            }
+
+            form.form-inline
+            {
+                margin-bottom: 20px;
+            }
+
             div.container div
             {
                 /*background: red;*/
@@ -34,15 +55,13 @@
     <body>
         <div class="container">
 
-            <form class="form-inline" accept-charset="#" method="post">
-                <div class="row">
-                    <div class="form-group col-md-9">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="exampleInputAmount" name="contentMaster"/>
-                        </div>
+            <form class="form-inline" action="/addOneContent" method="post">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control col-md-9" id="exampleInputAmount" name="contentMaster" required/>
                     </div>
-                    <button type="submit" class="btn btn-primary">添加此条内容</button>
                 </div>
+                <button type="submit" class="btn btn-primary">添加此条内容</button>
             </form>
 
             <table class="table table-bordered">
