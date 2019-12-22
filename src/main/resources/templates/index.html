@@ -49,6 +49,16 @@
                 display: flex;
                 justify-content: center;
             }
+
+            .none-ele
+            {
+                display: none;
+            }
+
+            pre
+            {
+                color: red;
+            }
         </style>
     </head>
 
@@ -64,44 +74,82 @@
                 <button type="submit" class="btn btn-primary">添加此条内容</button>
             </form>
 
-            <table class="table table-bordered">
-                <tr>
-                    <th class="text-center">内容</th>
-                    <th class="col-md-3 text-center">操作</th>
-                </tr>
+            <form action="#">
+                <table class="table table-bordered">
 
-                <tr th:each="foo : ${all_content}">
+                    <!--表头-->
+                    <tr>
+                        <th class="text-center">内容</th>
+                        <th class="col-md-3 text-center">操作</th>
+                    </tr>
+                    <!--//表头-->
 
-                    <!--显示内容-->
-<!--                    <td class="text-center">-->
-<!--                        <pre th:id="@{'c'+${foo.contentId}}" th:text="${foo.contentMaster}"></pre>-->
-<!--                    </td>-->
-<!--                    <td class="col-md-3 text-center">-->
-<!--                        <button class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">复制</button>-->
-<!--                        <a class="btn btn-info" th:href="@{ '/xxx?id=' + ${foo.contentId} }">修改</a>-->
-<!--                        <a class="btn btn-danger" th:href="@{ '/removeOneContent?id=' + ${foo.contentId} }">删除</a>-->
-<!--                    </td>-->
-                    <!--//显示内容-->
-
-                    <!--修改-->
-                    <form action="#" method="post">
+                    <tr th:each="foo : ${all_content}">
                         <td class="text-center">
-                            <input th:id="@{'c'+${foo.contentId}}" th:value="${foo.contentMaster}" class="form-control text-center" required/>
+                            <!--展示-->
+                            <pre name="show-content" th:id="@{'c'+${foo.contentId}}" th:text="${foo.contentMaster}"></pre>
+
+                            <!--修改-->
+                            <input name="contentMaster" th:id="@{'c'+${foo.contentId}}" th:value="${foo.contentMaster}" class="form-control text-center" required/>
                         </td>
                         <td class="col-md-3 text-center">
-                            <button class="btn btn-info">提交</button>
-                            <button class="btn btn-danger" th:href="@{ '/removeOneContent?id=' + ${foo.contentId} }">返回</button>
-                        </td>
-                    </form>
-                    <!--//修改-->
+                            <!--展示-->
+                            <a name="show-content" class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">复制</a>
+                            <a name="show-content" my="update-content" class="btn btn-info">修改</a> <!-- 修改按钮 -->
+                            <a name="show-content" class="btn btn-danger" th:href="@{ '/removeOneContent?id=' + ${foo.contentId} }">删除</a>
 
-                </tr>
-            </table>
+                            <!--修改-->
+                            <input name="update-content" class="btn btn-info" type="submit" value="提交"/>
+                            <a name="update-content" my="back" class="btn btn-info">返回</a> <!-- 返回按钮 -->
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
         </div>
 
         <script>
             var clipboard = new ClipboardJS('.btn');
+
+            // 隐藏 修改内容
+            $('input[name=contentMaster]').addClass('none-ele');
+            $('input[name=update-content]').addClass('none-ele');
+            $('a[name=update-content]').addClass('none-ele');
+
+            // 为修改按钮绑定事件
+            // 这一行 隐藏 展示内容  显示 修改内容
+            $('a[my=update-content]').click
+            (
+                function ()
+                {
+                    $(this).parent().prev().find('pre[name=show-content]').addClass('none-ele');
+
+                    $(this).prev().addClass('none-ele');
+                    $(this).addClass('none-ele');
+                    $(this).next().addClass('none-ele');
+
+                    $(this).parent().prev().find('input[name=contentMaster]').removeClass('none-ele');
+                    $(this).next().next().removeClass('none-ele');
+                    $(this).next().next().next().removeClass('none-ele');
+                }
+            );
+
+            // 为返回按钮绑定事件
+            // 这一行 显示 展示内容  隐藏 修改内容
+            $('a[my=back]').click
+            (
+                function ()
+                {
+                    $(this).parent().prev().find('pre[name=show-content]').removeClass('none-ele');
+                    $(this).prev().prev().removeClass('none-ele');
+                    $(this).prev().prev().prev().removeClass('none-ele');
+                    $(this).prev().prev().prev().prev().removeClass('none-ele');
+
+                    $(this).parent().prev().find('input[name=contentMaster]').addClass('none-ele');
+                    $(this).prev().addClass('none-ele');
+                    $(this).addClass('none-ele');
+                }
+            );
         </script>
 
     </body>
