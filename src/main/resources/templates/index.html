@@ -59,6 +59,11 @@
             {
                 color: red;
             }
+
+            input[name=contentId]
+            {
+                display: none;
+            }
         </style>
     </head>
 
@@ -74,22 +79,23 @@
                 <button type="submit" class="btn btn-primary">添加此条内容</button>
             </form>
 
-            <form action="#">
-                <table class="table table-bordered">
+            <table class="table table-bordered">
 
-                    <!--表头-->
-                    <tr>
-                        <th class="text-center">内容</th>
-                        <th class="col-md-3 text-center">操作</th>
-                    </tr>
-                    <!--//表头-->
+                <!--表头-->
+                <tr>
+                    <th class="text-center">内容</th>
+                    <th class="col-md-3 text-center">操作</th>
+                </tr>
+                <!--//表头-->
 
-                    <tr th:each="foo : ${all_content}">
+                <tr th:each="foo : ${all_content}">
+                    <form action="/updateContextById" method="post">
                         <td class="text-center">
                             <!--展示-->
                             <pre name="show-content" th:id="@{'c'+${foo.contentId}}" th:text="${foo.contentMaster}"></pre>
 
                             <!--修改-->
+                            <input name="contentId" th:value="${foo.contentId}" class="form-control text-center" readonly/>
                             <input name="contentMaster" th:id="@{'c'+${foo.contentId}}" th:value="${foo.contentMaster}" class="form-control text-center" required/>
                         </td>
                         <td class="col-md-3 text-center">
@@ -102,9 +108,9 @@
                             <input name="update-content" class="btn btn-info" type="submit" value="提交"/>
                             <a name="update-content" my="back" class="btn btn-info">返回</a> <!-- 返回按钮 -->
                         </td>
-                    </tr>
-                </table>
-            </form>
+                    </form>
+                </tr>
+            </table>
 
         </div>
 

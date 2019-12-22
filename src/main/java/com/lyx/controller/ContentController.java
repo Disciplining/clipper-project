@@ -5,10 +5,7 @@ import com.lyx.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -52,6 +49,14 @@ public class ContentController
 	public String removeOneContent(@RequestParam("id") int id)
 	{
 		service.removeById(id);
+
+		return "redirect:/";
+	}
+
+	@PostMapping("/updateContextById")
+	public String updateContextById(Content content)
+	{
+		service.updateById(content);
 
 		return "redirect:/";
 	}
