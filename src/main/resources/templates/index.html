@@ -4,7 +4,12 @@
 
     <head>
         <meta charset="UTF-8">
+
         <title>李艳兴的剪切板</title>
+
+        <!-- 适配手机 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
         <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> <!-- jquery -->
         <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> <!-- bootstrap核心js -->
         <script src="/clipboard.min.js"></script>
@@ -12,6 +17,17 @@
         <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> <!-- bootstrap核心css -->
 
         <style>
+            body
+            {
+                background: url("/body-bg.png") no-repeat;
+                background-size: cover;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                -ms-background-size: cover;
+                background-attachment: fixed;
+            }
+
             .container
             {
                 margin-top: 50px;
@@ -63,6 +79,11 @@
             input[name=contentId]
             {
                 display: none;
+            }
+
+            table tr th
+            {
+                color: white;
             }
         </style>
     </head>
