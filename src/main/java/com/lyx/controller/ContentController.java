@@ -48,11 +48,16 @@ public class ContentController
 	@GetMapping("/removeOneContent")
 	public String removeOneContent(@RequestParam("id") int id)
 	{
-		service.removeById(id);
+		service.removeOneContent(id);
 
 		return "redirect:/";
 	}
 
+	/**
+	 * 根据id更新一条内容
+	 * @param content
+	 * @return
+	 */
 	@PostMapping("/updateContextById")
 	public String updateContextById(Content content)
 	{
