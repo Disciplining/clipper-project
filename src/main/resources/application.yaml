@@ -1,5 +1,5 @@
 server:
-    port: 80
+    port: 8099
 
 spring:
     application:
@@ -16,6 +16,6 @@ spring:
         encoding: UTF-8
         cache: false # 关闭热缓存
 
-mybatis-plus:
-    configuration:
-        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis-plus:
+#    configuration:
+#        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
