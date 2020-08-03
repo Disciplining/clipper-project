@@ -27,7 +27,7 @@ public class PageController
 	@GetMapping("/")
 	public String index(Model model)
 	{
-		List<Content> list = service.list(); // 所有的内容
+		List<Content> list = service.listAllContent(); // 所有的内容
 
 		model.addAttribute("all_content", list);
 

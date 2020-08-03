@@ -24,7 +24,7 @@ public class ContentController
 	@ResponseBody
 	public List<Content> listAllContent()
 	{
-		return service.list();
+		return service.listAllContent();
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class ContentController
 	@PostMapping("/addOneContent")
 	public String addOneContent(Content content)
 	{
-		service.save(content);
+		service.addOneContent(content);
 
 		return "redirect:/";
 	}

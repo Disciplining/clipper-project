@@ -15,4 +15,7 @@ public class Content
 
 	@TableField("content_master")
 	private String contentMaster;
+
+	@TableField("order_key")
+	private Integer orderKey;
 }
