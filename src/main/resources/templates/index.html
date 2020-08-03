@@ -111,6 +111,7 @@
 
                 <tr th:each="foo : ${all_content}">
                     <form action="/updateContextById" method="post">
+
                         <td class="text-center">
                             <!--展示-->
                             <pre name="show-content" th:id="@{'c'+${foo.contentId}}" th:text="${foo.contentMaster}"></pre>
@@ -119,16 +120,22 @@
                             <input name="contentId" th:value="${foo.contentId}" class="form-control text-center" readonly/>
                             <input name="contentMaster" th:id="@{'c'+${foo.contentId}}" th:value="${foo.contentMaster}" class="form-control text-center" required/>
                         </td>
-                        <td class="col-md-3 text-center">
+
+                        <td class="col-md-4 text-center">
                             <!--展示-->
                             <a name="show-content" class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">复制</a>
                             <a name="show-content" my="update-content" class="btn btn-info">修改</a> <!-- 修改按钮 -->
                             <a name="show-content" class="btn btn-danger" th:href="@{ '/removeOneContent?id=' + ${foo.contentId} }">删除</a>
+                            <a href="#" class="btn-small btn-info" >上移</a>
+                            <a href="#" class="btn-small btn-info" >下移</a>
+                            <a href="#" class="btn-small btn-info" >移到最前</a>
+                            <a href="#" class="btn-small btn-info" >移到最后</a>
 
                             <!--修改-->
                             <input name="update-content" class="btn btn-info" type="submit" value="提交"/>
                             <a name="update-content" my="back" class="btn btn-info">返回</a> <!-- 返回按钮 -->
                         </td>
+
                     </form>
                 </tr>
             </table>
@@ -149,15 +156,22 @@
             (
                 function ()
                 {
+                    // 隐藏展显框
                     $(this).parent().prev().find('pre[name=show-content]').addClass('none-ele');
+                    // 隐藏按钮
+                    $(this).prev().addClass('none-ele'); // 复制按钮
+                    $(this).addClass('none-ele'); // 修改按钮
+                    $(this).next().addClass('none-ele'); // 删除按钮
+                    $(this).next().next().addClass('none-ele'); // 上移
+                    $(this).next().next().next().addClass('none-ele'); // 下移
+                    $(this).next().next().next().next().addClass('none-ele'); // 移到最前
+                    $(this).next().next().next().next().next().addClass('none-ele'); // 移到最后
 
-                    $(this).prev().addClass('none-ele');
-                    $(this).addClass('none-ele');
-                    $(this).next().addClass('none-ele');
-
+                    // 显示修改框
                     $(this).parent().prev().find('input[name=contentMaster]').removeClass('none-ele');
-                    $(this).next().next().removeClass('none-ele');
-                    $(this).next().next().next().removeClass('none-ele');
+                    // 显示按钮
+                    $(this).next().next().next().next().next().next().removeClass('none-ele'); // 提交
+                    $(this).next().next().next().next().next().next().next().removeClass('none-ele'); // 返回
                 }
             );
 
@@ -167,14 +181,22 @@
             (
                 function ()
                 {
+                    // 显示内容
                     $(this).parent().prev().find('pre[name=show-content]').removeClass('none-ele');
-                    $(this).prev().prev().removeClass('none-ele');
-                    $(this).prev().prev().prev().removeClass('none-ele');
-                    $(this).prev().prev().prev().prev().removeClass('none-ele');
+                    // 显示按钮
+                    $(this).prev().prev().removeClass('none-ele'); // 移到最后
+                    $(this).prev().prev().prev().removeClass('none-ele'); // 移到最前
+                    $(this).prev().prev().prev().prev().removeClass('none-ele'); // 下移
+                    $(this).prev().prev().prev().prev().prev().removeClass('none-ele'); // 上移
+                    $(this).prev().prev().prev().prev().prev().prev().removeClass('none-ele'); // 删除
+                    $(this).prev().prev().prev().prev().prev().prev().prev().removeClass('none-ele'); // 修改
+                    $(this).prev().prev().prev().prev().prev().prev().prev().prev().removeClass('none-ele'); // 复制
 
+                    // 隐藏修改框
                     $(this).parent().prev().find('input[name=contentMaster]').addClass('none-ele');
-                    $(this).prev().addClass('none-ele');
-                    $(this).addClass('none-ele');
+                    // 隐藏按钮
+                    $(this).prev().addClass('none-ele'); // 提交
+                    $(this).addClass('none-ele'); // 返回
                 }
             );
         </script>
