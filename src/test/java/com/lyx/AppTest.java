@@ -16,6 +16,5 @@ public class AppTest
     @Test
     public void test1()
     {
-        service.setFirstOrLast(6, false);
     }
 }

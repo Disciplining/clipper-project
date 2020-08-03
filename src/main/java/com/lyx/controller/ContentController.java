@@ -17,17 +17,6 @@ public class ContentController
 	private ContentService service;
 
 	/**
-	 * 查询所有内容
-	 * @return
-	 */
-	@GetMapping("/listAllContent")
-	@ResponseBody
-	public List<Content> listAllContent()
-	{
-		return service.listAllContent();
-	}
-
-	/**
 	 * 添加一条内容
 	 * @param content
 	 * @return
@@ -64,5 +53,30 @@ public class ContentController
 		service.updateById(content);
 
 		return "redirect:/";
+	}
+
+	@PutMapping("/content/{id}")
+	public String changeOrder(@PathVariable("id") int id, @RequestParam boolean isUp)
+	{
+		service.changeOrder(id, isUp);
+		return "redirect:/";
+	}
+
+	@PutMapping("/content/first-or-last/{id}")
+	public String setFirstOrLast(@PathVariable("id") int id, @RequestParam boolean isFirst)
+	{
+		service.setFirstOrLast(id, isFirst);
+		return "redirect:/";
+	}
+
+	/**
+	 * 查询所有内容
+	 * @return
+	 */
+	@GetMapping("/listAllContent")
+	@ResponseBody
+	public List<Content> listAllContent()
+	{
+		return service.listAllContent();
 	}
 }
