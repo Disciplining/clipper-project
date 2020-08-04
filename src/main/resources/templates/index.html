@@ -19,7 +19,7 @@
         <style>
             body
             {
-                background: url("/body-bg.png") no-repeat;
+                background: url(" //blog.mrabit.com/bing/today") no-repeat;
                 background-size: cover;
                 -webkit-background-size: cover;
                 -moz-background-size: cover;
@@ -83,12 +83,15 @@
 
             table tr th
             {
-                color: white;
+                color: #ffffff;
+                text-shadow:0 0 0.2em #000000,
+                            -0 -0 0.2em #000000;
             }
         </style>
     </head>
 
     <body>
+
         <div class="container">
 
             <form class="form-inline" action="/addOneContent" method="post">
@@ -126,10 +129,10 @@
                             <a name="show-content" class="btn btn-success" data-clipboard-action="copy" th:data-clipboard-target="@{'#c'+${foo.contentId}}">复制</a>
                             <a name="show-content" my="update-content" class="btn btn-info">修改</a> <!-- 修改按钮 -->
                             <a name="show-content" class="btn btn-danger" th:href="@{ '/removeOneContent?id=' + ${foo.contentId} }">删除</a>
-                            <a href="#" class="btn-small btn-info" >上移</a>
-                            <a href="#" class="btn-small btn-info" >下移</a>
-                            <a href="#" class="btn-small btn-info" >移到最前</a>
-                            <a href="#" class="btn-small btn-info" >移到最后</a>
+                            <a th:href=" @{'/content/' + ${foo.contentId} + '?isUp=true'} " class="btn-small btn-info" >上移</a>
+                            <a th:href=" @{'/content/' + ${foo.contentId} + '?isUp=false'} " class="btn-small btn-info" >下移</a>
+                            <a th:href=" @{'/content/first-or-last/' + ${foo.contentId} + '?isFirst=true'} " class="btn-small btn-info" >移到最前</a>
+                            <a th:href=" @{'/content/first-or-last/' + ${foo.contentId} + '?isFirst=false'} " class="btn-small btn-info" >移到最后</a>
 
                             <!--修改-->
                             <input name="update-content" class="btn btn-info" type="submit" value="提交"/>

@@ -55,14 +55,14 @@ public class ContentController
 		return "redirect:/";
 	}
 
-	@PutMapping("/content/{id}")
+	@GetMapping("/content/{id}")
 	public String changeOrder(@PathVariable("id") int id, @RequestParam boolean isUp)
 	{
 		service.changeOrder(id, isUp);
 		return "redirect:/";
 	}
 
-	@PutMapping("/content/first-or-last/{id}")
+	@GetMapping("/content/first-or-last/{id}")
 	public String setFirstOrLast(@PathVariable("id") int id, @RequestParam boolean isFirst)
 	{
 		service.setFirstOrLast(id, isFirst);
