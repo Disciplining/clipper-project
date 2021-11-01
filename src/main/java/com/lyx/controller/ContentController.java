@@ -29,34 +29,10 @@ public class ContentController
 //        return "redirect:/";
 //    }
 //
-//    /**
-//     * 删除一条内容
-//     * @param id
-//     * @return
-//     */
-//    @GetMapping("/removeOneContent")
-//    public String removeOneContent(@RequestParam("id") int id)
-//    {
-//        service.removeOneContent(id);
-//
-//        return "redirect:/";
-//    }
 //
 //
 //
-//    @GetMapping("/content/{id}")
-//    public String changeOrder(@PathVariable("id") int id, @RequestParam boolean isUp)
-//    {
-//        service.changeOrder(id, isUp);
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/content/first-or-last/{id}")
-//    public String setFirstOrLast(@PathVariable("id") int id, @RequestParam boolean isFirst)
-//    {
-//        service.setFirstOrLast(id, isFirst);
-//        return "redirect:/";
-//    }
+
 
 
 
@@ -105,5 +81,32 @@ public class ContentController
     public List<Content> listAllContent()
     {
         return service.listAllContent();
+    }
+
+    /**
+     * 删除一条内容
+     */
+    @ResponseBody
+    @DeleteMapping("/removeOneContent")
+    public void removeOneContent(@RequestParam("id") int id)
+    {
+        service.removeOneContent(id);
+    }
+
+    /**
+     * 上下移
+     */
+    @PutMapping("/content/{id}")
+    @ResponseBody
+    public void changeOrder(@PathVariable("id") int id, @RequestParam boolean isUp)
+    {
+        service.changeOrder(id, isUp);
+    }
+
+    @PutMapping("/content/first-or-last/{id}")
+    @ResponseBody
+    public void setFirstOrLast(@PathVariable("id") int id, @RequestParam boolean isFirst)
+    {
+        service.setFirstOrLast(id, isFirst);
     }
 }

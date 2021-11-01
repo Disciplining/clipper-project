@@ -23,6 +23,9 @@ function init()
                 editEvent();
                 backEvent();
                 submitEvent();
+                delEvent();
+                upAndDownEvent();
+                firstAndLastEvent();
             },
             error : function ()
             {
@@ -46,11 +49,11 @@ function setHtml(body)
             '                    <div class="btn-group col-lg-5" role="group">' +
             '                        <button type="button" class="btn btn-primary" data-clipboard-action="copy" data-clipboard-target="#c' + el.contentId + '">复制</button>' +
             '                        <button type="button" class="btn btn-success" my="update">修改</button>' +
-            '                        <button type="button" class="btn btn-danger">删除</button>' +
-            '                        <button type="button" class="btn btn-info">上移</button>' +
-            '                        <button type="button" class="btn btn-info">下移</button>' +
-            '                        <button type="button" class="btn btn-info">移到最前</button>' +
-            '                        <button type="button" class="btn btn-info">移到最后</button>' +
+            '                        <button type="button" class="btn btn-danger" my="del">删除</button>' +
+            '                        <button type="button" class="btn btn-info" my="up">上移</button>' +
+            '                        <button type="button" class="btn btn-info" my="down">下移</button>' +
+            '                        <button type="button" class="btn btn-info" my="first">移到最前</button>' +
+            '                        <button type="button" class="btn btn-info" my="last">移到最后</button>' +
             '                    </div>' +
             '                </div>' +
             '                <div class="hide">' +
@@ -111,7 +114,7 @@ function submitEvent()
         {
             let value = $(this).parent().prev().val();
             let cid = $(this).parent().parent().prev().children(':first').attr('id');
-            var id = cid.substr(cid.indexOf('c')+1);
+            let id = cid.substr(cid.indexOf('c')+1);
             $.ajax
             (
                 {
@@ -128,6 +131,149 @@ function submitEvent()
                     {
                         'Content-Type': 'application/json'
                     },
+                    success: function ()
+                    {
+                        window.location.reload();
+                    },
+                    error: function ()
+                    {
+                        alert('请求失败');
+                    }
+                }
+            );
+        }
+    );
+}
+
+/**
+ * 删除按钮绑定事件
+ */
+function delEvent()
+{
+    $('button[my=del]').bind
+    (
+        'click',
+        function ()
+        {
+            let cid = $(this).parent().prev().attr('id');
+            var id = cid.substr(cid.indexOf('c')+1);
+            $.ajax
+            (
+                {
+                    url : '/removeOneContent?id=' + id,
+                    type : 'DELETE',
+                    success: function ()
+                    {
+                        window.location.reload();
+                    },
+                    error: function ()
+                    {
+                        alert('请求失败');
+                    }
+                }
+            );
+        }
+    );
+}
+
+/**
+ * 上下移按钮绑定事件
+ */
+function upAndDownEvent()
+{
+    $('button[my=up]').bind
+    (
+        'click',
+        function ()
+        {
+            let cid = $(this).parent().prev().attr('id');
+            var id = cid.substr(cid.indexOf('c')+1);
+            $.ajax
+            (
+                {
+                    url : '/content/' + id + "?isUp=true",
+                    type : 'PUT',
+                    success: function ()
+                    {
+                        window.location.reload();
+                    },
+                    error: function ()
+                    {
+                        alert('请求失败');
+                    }
+                }
+            );
+        }
+    );
+
+    $('button[my=down]').bind
+    (
+        'click',
+        function ()
+        {
+            let cid = $(this).parent().prev().attr('id');
+            var id = cid.substr(cid.indexOf('c')+1);
+            $.ajax
+            (
+                {
+                    url : '/content/' + id + "?isUp=false",
+                    type : 'PUT',
+                    success: function ()
+                    {
+                        window.location.reload();
+                    },
+                    error: function ()
+                    {
+                        alert('请求失败');
+                    }
+                }
+            );
+        }
+    );
+}
+
+/**
+ * 移到最前、移到最后 绑定事件
+ */
+function firstAndLastEvent()
+{
+    $('button[my=first]').bind
+    (
+        'click',
+        function ()
+        {
+            let cid = $(this).parent().prev().attr('id');
+            var id = cid.substr(cid.indexOf('c')+1);
+            $.ajax
+            (
+                {
+                    url : '/content/first-or-last/' + id + "?isFirst=true",
+                    type : 'PUT',
+                    success: function ()
+                    {
+                        window.location.reload();
+                    },
+                    error: function ()
+                    {
+                        alert('请求失败');
+                    }
+                }
+            );
+        }
+    );
+
+    $('button[my=last]').bind
+    (
+        'click',
+        function ()
+        {
+            let cid = $(this).parent().prev().attr('id');
+            var id = cid.substr(cid.indexOf('c')+1);
+            $.ajax
+            (
+                {
+                    url : '/content/first-or-last/' + id + "?isFirst=false",
+                    type : 'PUT',
                     success: function ()
                     {
                         window.location.reload();
