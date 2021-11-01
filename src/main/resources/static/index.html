@@ -19,16 +19,33 @@
 
             .component
             {
-                padding-bottom: 80px;
+                padding-bottom: 90px;
             }
 
             .content
             {
-                border-radius: 3px;
-                border: 1px #d5d4d4 solid;
-                padding: 10px;
-                height: 50px;
+                border-bottom: 1px #000000 solid;
+                border-radius: 5px;
+
                 text-align: left;
+                line-height: 50px;
+                font-family: Stencil Std, fantasy, monospace;
+                font-size: 20px;
+
+                height: 50px;
+            }
+
+            #newLine
+            {
+                border: 1px #000000 solid;
+                border-radius: 5px;
+
+                text-align: left;
+                line-height: 50px;
+                font-family: Stencil Std, fantasy, monospace;
+                font-size: 20px;
+
+                height: 50px;
             }
 
             .hide
@@ -41,7 +58,7 @@
     <body>
         <div class="container">
             <div class="component">
-                <input id="newLine" type="text" class="content col-lg-7"/>
+                <input id="newLine" type="text" class="col-lg-7"/>
                 <div class="btn-group col-lg-5" role="group">
                     <button id="addLine" type="button" class="btn btn-warning">新增这一条内容</button>
                 </div>

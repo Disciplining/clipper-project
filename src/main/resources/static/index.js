@@ -83,6 +83,7 @@ function editEvent()
         {
             $(this).parent().parent().addClass('hide');
             $(this).parent().parent().next().removeClass('hide');
+            $(this).parent().parent().next().children(':first').focus();
         }
     );
 }
