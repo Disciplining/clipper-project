@@ -16,54 +16,18 @@ public class ContentController
     @Qualifier("contentServiceImpl")
     private ContentService service;
 
-//    /**
-//     * 添加一条内容
-//     * @param content
-//     * @return
-//     */
-//    @PostMapping("/addOneContent")
-//    public String addOneContent(Content content)
-//    {
-//        service.addOneContent(content);
-//
-//        return "redirect:/";
-//    }
-//
-//
-//
-//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * 添加一条内容
+     */
+    @PostMapping("/addOneContent")
+    @ResponseBody
+    public void addOneContent(@RequestBody Content content)
+    {
+        service.addOneContent(content);
+    }
 
     /**
      * 根据id更新一条内容
-     * @param content
-     * @return
      */
     @PostMapping("/updateContextById")
     @ResponseBody
@@ -103,6 +67,9 @@ public class ContentController
         service.changeOrder(id, isUp);
     }
 
+    /**
+     * 移到最前 移到最后
+     */
     @PutMapping("/content/first-or-last/{id}")
     @ResponseBody
     public void setFirstOrLast(@PathVariable("id") int id, @RequestParam boolean isFirst)

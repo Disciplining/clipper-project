@@ -3,6 +3,7 @@ $(
     {
         new ClipboardJS('.btn-primary');
         init();
+        addLine();
     }
 )
 
@@ -274,6 +275,51 @@ function firstAndLastEvent()
                 {
                     url : '/content/first-or-last/' + id + "?isFirst=false",
                     type : 'PUT',
+                    success: function ()
+                    {
+                        window.location.reload();
+                    },
+                    error: function ()
+                    {
+                        alert('请求失败');
+                    }
+                }
+            );
+        }
+    );
+}
+
+/**
+ * 新增这一条内容按钮绑定事件
+ */
+function addLine()
+{
+    $('#addLine').bind
+    (
+        'click',
+        function ()
+        {
+            let value = $('#newLine').val();
+            if (value === '' || value === undefined)
+            {
+                alert('请输入需要新增的数据');
+                return;
+            }
+            $.ajax
+            (
+                {
+                    url : '/addOneContent',
+                    type : 'POST',
+                    data:JSON.stringify
+                    (
+                        {
+                            "contentMaster": value
+                        }
+                    ),
+                    headers:
+                    {
+                        'Content-Type': 'application/json'
+                    },
                     success: function ()
                     {
                         window.location.reload();
